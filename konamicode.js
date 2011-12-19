@@ -19,7 +19,7 @@ var enter = 13;
 
 var konamiCode = [up, up, down, down, left, right, left, right, b, a, enter];
 
-var konamiCodeFound = $(window).toObservable("keydown")
+var konamiCodeFound = $(window).toObservable("keyup")
   .Select(function(x) { return x.keyCode })
   .BufferWithCount(konamiCode.length, 1)
   .Select(function(sequence) {
@@ -41,13 +41,10 @@ konamiCodeFound
   .Take(1)
   .Catch(Rx.Observable.Return(false))
   .Subscribe(function(foundInTime) {
-    $("#hint").fadeIn("fast");
-  });
-
-konamiCodeFound
-  .Subscribe(function(x) {
-    if (x == true) {
+    if (foundInTime) {
       $("#content").text("CheatCode Found!");
+    } else {
+      $("#hint").fadeIn("fast");
     }
   });
 

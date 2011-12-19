@@ -29,7 +29,9 @@ searchResults.Subscribe(function(repos) {
     }
     $('#content').append('<li><b>' + value.name + ':</b> - ' + value.description + '</li>');
   });
-}, function(ex) { console.log(ex); });
+}, function(ex) { 
+  console.log(ex); 
+});
 
 
 // vim: ts=2 sw=2 et :
